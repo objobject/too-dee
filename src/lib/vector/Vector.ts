@@ -1,4 +1,4 @@
-export class Vector2D {
+export class Vector {
     x: number;
     y: number;
 
@@ -7,7 +7,7 @@ export class Vector2D {
         this.y = y;
     }
 
-    add(vector: Vector2D) {
+    add(vector: Vector) {
         this.x += vector.x;
         this.y += vector.y;
 
@@ -21,7 +21,7 @@ export class Vector2D {
         return this;
     }
 
-    substract(vector: Vector2D) {
+    substract(vector: Vector) {
         this.x -= vector.x;
         this.y -= vector.y;
 
@@ -35,7 +35,7 @@ export class Vector2D {
         return this;
     }
 
-    multiply(vector: Vector2D) {
+    multiply(vector: Vector) {
         this.x *= vector.x;
         this.y *= vector.y;
 
@@ -56,7 +56,7 @@ export class Vector2D {
         return this;
     }
 
-    dot(vector: Vector2D) {
+    dot(vector: Vector) {
         return (this.x * vector.x) + (this.y * vector.y);
     }
 

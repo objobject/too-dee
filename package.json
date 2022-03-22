@@ -2,9 +2,11 @@
   "name": "too-dee",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "compile": "npx tsc -t tsconfig.json"
   },
   "repository": {
     "type": "git",
