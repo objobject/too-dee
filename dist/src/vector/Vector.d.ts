@@ -1,4 +1,5 @@
-export declare class Vector {
+import { PointI } from "../types";
+export declare class Vector implements PointI {
     x: number;
     y: number;
     constructor(x: number, y: number);

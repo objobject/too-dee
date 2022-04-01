@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Matrix = void 0;
 const MATRIX_POSITIONS = [[0, 0], [0, 1], [1, 0], [1, 1]];
-class Matrix {
+export class Matrix {
     constructor(matrix) {
         this.matrix = matrix;
     }
@@ -62,4 +59,3 @@ class Matrix {
         return matrix1Row[0] * matrix2Col[0] + matrix1Row[1] * matrix2Col[1];
     }
 }
-exports.Matrix = Matrix;

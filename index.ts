@@ -1,7 +1,13 @@
-import { Matrix } from './src/lib/matrix/Matrix';
-import { Vector } from './src/lib/vector/Vector';
+import { BroadCollision } from './src/collision/BroadCollision';
+import { NarrowCollision } from './src/collision/NarrowCollision';
+import { Matrix } from './src/matrix/Matrix';
+import { Vector } from './src/vector/Vector';
+import { Shapes } from './src/shapes/index';
 
 export default {
     Vector,
-    Matrix
+    Matrix,
+    NarrowCollision,
+    BroadCollision,
+    Shapes
 }

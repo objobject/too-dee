@@ -1,8 +1,12 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const Matrix_1 = require("./src/lib/matrix/Matrix");
-const Vector_1 = require("./src/lib/vector/Vector");
-exports.default = {
-    Vector: Vector_1.Vector,
-    Matrix: Matrix_1.Matrix
+import { BroadCollision } from './src/collision/BroadCollision';
+import { NarrowCollision } from './src/collision/NarrowCollision';
+import { Matrix } from './src/matrix/Matrix';
+import { Vector } from './src/vector/Vector';
+import { Shapes } from './src/shapes/index';
+export default {
+    Vector,
+    Matrix,
+    NarrowCollision,
+    BroadCollision,
+    Shapes
 };
