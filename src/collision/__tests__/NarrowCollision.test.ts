@@ -146,7 +146,6 @@ describe("NarrowColission", () => {
 
 	describe("pointAndTriangle()", () => {
 		it("should return true if point is inside the triangle", () => {
-			console.log(Utils.calculateAreaOfTriangle([createPoint(0, 0), createPoint(3, 0), createPoint(0, 4)]));
 			const point = createPoint(2, 2);
 			const triangle = createTriangle(createPoint(1, 1), createPoint(3, 3), createPoint(2, 10));
 

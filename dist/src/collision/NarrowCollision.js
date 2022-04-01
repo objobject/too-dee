@@ -43,6 +43,11 @@ export class NarrowCollision {
         return this.pointAndCircle(closestPoint, circle);
     }
     static circleAndRectangle(circle, rect) {
+        let xN = Math.max(rect.corner.x, Math.min(circle.center.x, rect.corner.x + rect.width));
+        let yN = Math.max(rect.corner.y, Math.min(circle.center.y, rect.corner.y + rect.height));
+        let dX = xN - circle.center.x;
+        let dY = yN - circle.center.y;
+        return (dX * dX + dY * dY) <= circle.radius * circle.radius;
         let tX = circle.center.x;
         let tY = circle.center.y;
         if (circle.center.x < rect.corner.x) {

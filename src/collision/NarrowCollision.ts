@@ -62,28 +62,13 @@ export class NarrowCollision {
 	}
 
 	static circleAndRectangle(circle: Circle, rect: RectangleI) {
-		let tX = circle.center.x;
-		let tY = circle.center.y;
+        let xN = Math.max(rect.corner.x, Math.min(circle.center.x, rect.corner.x + rect.width));
+		let yN = Math.max(rect.corner.y, Math.min(circle.center.y, rect.corner.y + rect.height));
 
-		if (circle.center.x < rect.corner.x) {
-			tX = rect.corner.x;
-		}
-		if (circle.center.x > rect.corner.x + rect.width) {
-			tX = rect.corner.x + rect.width;
-		}
-		if (circle.center.y < rect.corner.y) {
-			tY = rect.corner.y;
-		}
-		if (circle.center.y < rect.corner.y + rect.height) {
-			tY = rect.corner.y + rect.height;
-		}
+		let dX = xN - circle.center.x;
+		let dY = yN - circle.center.y;
 
-		const distanceX = circle.center.x - tX;
-		const distanceY = circle.center.y - tY;
-
-		const distance = Math.sqrt(distanceX^2 + distanceY^2);
-
-		return distance <= circle.radius;
+        return (dX * dX + dY * dY) <= circle.radius * circle.radius;
 	}
 
 	static circleAndPolygon(circle: Circle, polygon: PolygonI) {

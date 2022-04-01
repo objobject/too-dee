@@ -17,7 +17,7 @@ export interface TriangleI {
 export interface PolygonI {
     vertices: PointI[];
 }
-export interface CircleI {
+export interface Circle {
     center: PointI;
     radius: number;
 }
