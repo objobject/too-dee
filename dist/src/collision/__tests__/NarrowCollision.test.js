@@ -1,5 +1,5 @@
-import { Utils } from "../../Utils";
 import { NarrowCollision } from "../NarrowCollision";
+
 describe("NarrowColission", () => {
     describe("pointAndPoint()", () => {
         it("should return true if points are at the same position", () => {

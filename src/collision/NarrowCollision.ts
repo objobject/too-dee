@@ -1,3 +1,4 @@
+import { Polygon } from '../shapes/Polygon';
 import { PointI, LineI, Circle, RectangleI, PolygonI, TriangleI } from '../types';
 import { Utils } from '../Utils';
 
@@ -37,7 +38,22 @@ export class NarrowCollision {
 	}
 
 	static pointAndPolygon(point: PointI, polygon: PolygonI) {
+		const poly = Polygon.from(polygon);
+		const boundingBox = poly.getBoundingBox();
 
+		if (!this.pointAndRectangle(point, boundingBox)) {
+			return false;
+		}
+
+		const triangles = poly.fanTriangulate();
+
+		for (const triangle of triangles) {
+			if (this.pointAndTriangle(point, triangle)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	static circleAndCircle(circleA: Circle, circleB: Circle) {

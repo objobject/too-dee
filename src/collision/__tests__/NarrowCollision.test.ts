@@ -203,6 +203,34 @@ describe("NarrowColission", () => {
 			expect(NarrowCollision.lineAndRectangle(line, rectangle)).toEqual(false);
 		});
 	});
+
+	describe("pointAndPolygon()", () => {
+
+		it("should return true if point collides with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(2, 5),
+				createPoint(6, 6),
+				createPoint(8, 3),
+				createPoint(5, 0)
+			);
+			const point = createPoint(3, 3);
+
+			expect(NarrowCollision.pointAndPolygon(point, polygon)).toEqual(true);
+		});
+		it("should return false if point does not collide with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(2, 5),
+				createPoint(6, 6),
+				createPoint(8, 3),
+				createPoint(5, 0)
+			);
+			const point = createPoint(1, 1);
+
+			expect(NarrowCollision.pointAndPolygon(point, polygon)).toEqual(false);
+		})
+	})
 });
 
 const createPoint = (x: number, y: number): PointI => ({
