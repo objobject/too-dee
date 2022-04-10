@@ -1,11 +1,11 @@
-import { PointI } from "../types";
-import { RectangleI as RectangleI } from "../types";
+import { PointI } from '../types';
+import { RectangleI as RectangleI } from '../types';
 
 export class Rectangle implements RectangleI {
 	constructor(
 		public corner: PointI,
 		public width: number,
-		public height: number
+		public height: number,
 	) {}
 
 	normalize() {

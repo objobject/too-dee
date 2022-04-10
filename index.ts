@@ -5,9 +5,9 @@ import { Vector } from './src/vector/Vector';
 import { Shapes } from './src/shapes/index';
 
 export default {
-    Vector,
-    Matrix,
-    NarrowCollision,
-    BroadCollision,
-    Shapes
-}
+	Vector,
+	Matrix,
+	NarrowCollision,
+	BroadCollision,
+	Shapes,
+};

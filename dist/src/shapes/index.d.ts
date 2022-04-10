@@ -1,9 +1,9 @@
-import { Circle } from "./Circle";
-import { Line } from "./Line";
-import { Point } from "./Point";
-import { Polygon } from "./Polygon";
-import { Rectangle } from "./Rectangle";
-import { Triangle } from "./Triangle";
+import { Circle } from './Circle';
+import { Line } from './Line';
+import { Point } from './Point';
+import { Polygon } from './Polygon';
+import { Rectangle } from './Rectangle';
+import { Triangle } from './Triangle';
 export declare const Shapes: {
     Point: typeof Point;
     Line: typeof Line;

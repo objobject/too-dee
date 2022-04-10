@@ -1,5 +1,5 @@
-import { PointI } from "../types";
-import { RectangleI as RectangleI } from "../types";
+import { PointI } from '../types';
+import { RectangleI as RectangleI } from '../types';
 export declare class Rectangle implements RectangleI {
     corner: PointI;
     width: number;

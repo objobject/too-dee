@@ -1,4 +1,4 @@
-import { LineI, PointI } from "../types";
+import { LineI, PointI } from '../types';
 export declare class Line implements LineI {
     start: PointI;
     end: PointI;

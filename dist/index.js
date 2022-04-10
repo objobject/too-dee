@@ -8,5 +8,5 @@ export default {
     Matrix,
     NarrowCollision,
     BroadCollision,
-    Shapes
+    Shapes,
 };

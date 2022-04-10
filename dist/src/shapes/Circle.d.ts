@@ -1,4 +1,4 @@
-import { PointI, Circle as CircleI } from "../types";
+import { PointI, Circle as CircleI } from '../types';
 export declare class Circle implements CircleI {
     center: PointI;
     radius: number;

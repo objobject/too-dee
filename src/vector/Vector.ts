@@ -1,96 +1,96 @@
-import { PointI } from "../types";
+import { PointI } from '../types';
 
 export class Vector implements PointI {
-    x: number;
-    y: number;
+	x: number;
+	y: number;
 
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-    }
+	constructor(x: number, y: number) {
+		this.x = x;
+		this.y = y;
+	}
 
-    add(vector: Vector) {
-        this.x += vector.x;
-        this.y += vector.y;
+	add(vector: Vector) {
+		this.x += vector.x;
+		this.y += vector.y;
 
-        return this;
-    }
-    
-    addScalar(by: number) {
-        this.x += by;
-        this.y += by;
+		return this;
+	}
 
-        return this;
-    }
+	addScalar(by: number) {
+		this.x += by;
+		this.y += by;
 
-    substract(vector: Vector) {
-        this.x -= vector.x;
-        this.y -= vector.y;
+		return this;
+	}
 
-        return this;
-    }
+	substract(vector: Vector) {
+		this.x -= vector.x;
+		this.y -= vector.y;
 
-    substractScalar(by: number) {
-        this.x -= by;
-        this.y -= by;
+		return this;
+	}
 
-        return this;
-    }
+	substractScalar(by: number) {
+		this.x -= by;
+		this.y -= by;
 
-    multiply(vector: Vector) {
-        this.x *= vector.x;
-        this.y *= vector.y;
+		return this;
+	}
 
-        return this;
-    }
+	multiply(vector: Vector) {
+		this.x *= vector.x;
+		this.y *= vector.y;
 
-    multiplyScalar(by: number) {
-        this.x *= by;
-        this.y *= by;
+		return this;
+	}
 
-        return this;
-    }
+	multiplyScalar(by: number) {
+		this.x *= by;
+		this.y *= by;
 
-    divide(by: number) {
-        this.x /= by;
-        this.y /= by;
+		return this;
+	}
 
-        return this;
-    }
+	divide(by: number) {
+		this.x /= by;
+		this.y /= by;
 
-    dot(vector: Vector) {
-        return (this.x * vector.x) + (this.y * vector.y);
-    }
+		return this;
+	}
 
-    length() {
-        return Math.sqrt(this.x * this.x + this.y * this.y);
-    }
-    
-    normalize() {
-        const length = this.length();
-        this.divide(length);
+	dot(vector: Vector) {
+		return this.x * vector.x + this.y * vector.y;
+	}
 
-        return this;
-    }
+	length() {
+		return Math.sqrt(this.x * this.x + this.y * this.y);
+	}
 
-    ceil() {
-        this.x = Math.ceil(this.x);
-        this.y = Math.ceil(this.y);
+	normalize() {
+		const length = this.length();
+		this.divide(length);
 
-        return this;
-    }
+		return this;
+	}
 
-    floor() {
-        this.x = Math.floor(this.x);
-        this.y = Math.floor(this.y);
+	ceil() {
+		this.x = Math.ceil(this.x);
+		this.y = Math.ceil(this.y);
 
-        return this;
-    }
+		return this;
+	}
 
-    random() {
-        this.x = Math.random();
-        this.y = Math.random();
+	floor() {
+		this.x = Math.floor(this.x);
+		this.y = Math.floor(this.y);
 
-        return this;
-    }
+		return this;
+	}
+
+	random() {
+		this.x = Math.random();
+		this.y = Math.random();
+
+		return this;
+	}
 }

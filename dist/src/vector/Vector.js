@@ -39,7 +39,7 @@ export class Vector {
         return this;
     }
     dot(vector) {
-        return (this.x * vector.x) + (this.y * vector.y);
+        return this.x * vector.x + this.y * vector.y;
     }
     length() {
         return Math.sqrt(this.x * this.x + this.y * this.y);

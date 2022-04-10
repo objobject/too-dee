@@ -1,4 +1,4 @@
-import { PointI } from "../types";
+import { PointI } from '../types';
 export declare class Vector implements PointI {
     x: number;
     y: number;

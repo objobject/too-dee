@@ -1,4 +1,9 @@
-const MATRIX_POSITIONS = [[0, 0], [0, 1], [1, 0], [1, 1]];
+const MATRIX_POSITIONS = [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1],
+];
 export class Matrix {
     constructor(matrix) {
         this.matrix = matrix;
@@ -55,7 +60,10 @@ export class Matrix {
     }
     multiplyRowAndColumn(matrix1, matrix2, position) {
         const matrix1Row = matrix1.matrix[position[0]];
-        const matrix2Col = [matrix2.matrix[0][position[1]], matrix2.matrix[1][position[1]]];
+        const matrix2Col = [
+            matrix2.matrix[0][position[1]],
+            matrix2.matrix[1][position[1]],
+        ];
         return matrix1Row[0] * matrix2Col[0] + matrix1Row[1] * matrix2Col[1];
     }
 }

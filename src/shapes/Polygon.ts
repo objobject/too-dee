@@ -1,11 +1,9 @@
-import { PointI, PolygonI } from "../types";
-import { Rectangle } from "./Rectangle";
-import { Triangle } from "./Triangle";
+import { PointI, PolygonI } from '../types';
+import { Rectangle } from './Rectangle';
+import { Triangle } from './Triangle';
 
 export class Polygon implements PolygonI {
-	constructor(
-		public vertices: PointI[]
-	) {}
+	constructor(public vertices: PointI[]) {}
 
 	getBoundingBox(): Rectangle {
 		let xMin = this.vertices[0].x;
@@ -36,7 +34,9 @@ export class Polygon implements PolygonI {
 		const triangles = [];
 
 		for (let i = 2; i < this.vertices.length; i++) {
-			triangles.push(new Triangle([rootVertex, this.vertices[i - 1], this.vertices[i]]));
+			triangles.push(
+				new Triangle([rootVertex, this.vertices[i - 1], this.vertices[i]]),
+			);
 		}
 
 		return triangles;

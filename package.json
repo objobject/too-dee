@@ -1,29 +1,31 @@
 {
-  "name": "@objobject/too-dee",
-  "version": "0.0.2",
-  "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "test": "jest",
-    "build": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/objobject/too-dee.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/objobject/too-dee/issues"
-  },
-  "homepage": "https://github.com/objobject/too-dee#readme",
-  "devDependencies": {
-    "@types/jest": "^27.4.1",
-    "jest": "^27.5.1",
-    "ts-jest": "^27.1.3",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.6.2"
-  }
+	"name": "@objobject/too-dee",
+	"version": "0.0.2",
+	"description": "",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"test": "jest",
+		"build": "tsc",
+		"fix-style": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/objobject/too-dee.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/objobject/too-dee/issues"
+	},
+	"homepage": "https://github.com/objobject/too-dee#readme",
+	"devDependencies": {
+		"@types/jest": "^27.4.1",
+		"jest": "^27.5.1",
+		"prettier": "^2.6.2",
+		"ts-jest": "^27.1.3",
+		"ts-node": "^10.7.0",
+		"typescript": "^4.6.2"
+	}
 }

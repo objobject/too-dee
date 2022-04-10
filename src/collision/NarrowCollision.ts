@@ -1,6 +1,13 @@
 import { Line } from '../shapes/Line';
 import { Polygon } from '../shapes/Polygon';
-import { PointI, LineI, Circle, RectangleI, PolygonI, TriangleI } from '../types';
+import {
+	PointI,
+	LineI,
+	Circle,
+	RectangleI,
+	PolygonI,
+	TriangleI,
+} from '../types';
 import { Utils } from '../Utils';
 
 export class NarrowCollision {
@@ -9,15 +16,23 @@ export class NarrowCollision {
 	}
 
 	static pointAndCircle(point: PointI, circle: Circle) {
-		return Utils.distanceBetweenTwoPoints(point, circle.center) <= circle.radius;
+		return (
+			Utils.distanceBetweenTwoPoints(point, circle.center) <= circle.radius
+		);
 	}
 
 	static pointAndLine(point: PointI, line: LineI) {
 		const lineLength = Utils.distanceBetweenTwoPoints(line.start, line.end);
-		const lineStartToPointLength = Utils.distanceBetweenTwoPoints(line.start, point);
-		const pointToLineEndLength = Utils.distanceBetweenTwoPoints(point, line.end);
+		const lineStartToPointLength = Utils.distanceBetweenTwoPoints(
+			line.start,
+			point,
+		);
+		const pointToLineEndLength = Utils.distanceBetweenTwoPoints(
+			point,
+			line.end,
+		);
 
-		return (lineStartToPointLength + pointToLineEndLength) === lineLength;
+		return lineStartToPointLength + pointToLineEndLength === lineLength;
 	}
 
 	static pointAndRectangle(point: PointI, rect: RectangleI) {
@@ -29,11 +44,27 @@ export class NarrowCollision {
 		);
 	}
 
-	static pointAndTriangle(point: PointI, triangle: TriangleI, errorMargin: number = 0.0001) {
+	static pointAndTriangle(
+		point: PointI,
+		triangle: TriangleI,
+		errorMargin: number = 0.0001,
+	) {
 		const originalArea = Utils.calculateAreaOfTriangle(triangle.vertices);
-		const area1 = Utils.calculateAreaOfTriangle([point, triangle.vertices[0], triangle.vertices[1]]);
-		const area2 = Utils.calculateAreaOfTriangle([point, triangle.vertices[0], triangle.vertices[2]]);
-		const area3 = Utils.calculateAreaOfTriangle([point, triangle.vertices[1], triangle.vertices[2]]);
+		const area1 = Utils.calculateAreaOfTriangle([
+			point,
+			triangle.vertices[0],
+			triangle.vertices[1],
+		]);
+		const area2 = Utils.calculateAreaOfTriangle([
+			point,
+			triangle.vertices[0],
+			triangle.vertices[2],
+		]);
+		const area3 = Utils.calculateAreaOfTriangle([
+			point,
+			triangle.vertices[1],
+			triangle.vertices[2],
+		]);
 
 		return Math.abs(area1 + area2 + area3 - originalArea) <= errorMargin;
 	}
@@ -58,7 +89,10 @@ export class NarrowCollision {
 	}
 
 	static circleAndCircle(circleA: Circle, circleB: Circle) {
-		return Utils.distanceBetweenTwoPoints(circleA.center, circleB.center) <= circleA.radius + circleB.radius;
+		return (
+			Utils.distanceBetweenTwoPoints(circleA.center, circleB.center) <=
+			circleA.radius + circleB.radius
+		);
 	}
 
 	static circleAndLine(circle: Circle, line: LineI) {
@@ -69,23 +103,32 @@ export class NarrowCollision {
 			return true;
 		}
 
-		const closestPoint = Utils.findClosestPointOnTheLineToTheCenterOfCircle(circle, line);
+		const closestPoint = Utils.findClosestPointOnTheLineToTheCenterOfCircle(
+			circle,
+			line,
+		);
 
 		if (this.pointAndLine(closestPoint, line) === false) {
-			return false; 
+			return false;
 		}
 
 		return this.pointAndCircle(closestPoint, circle);
 	}
 
 	static circleAndRectangle(circle: Circle, rect: RectangleI) {
-        let xN = Math.max(rect.corner.x, Math.min(circle.center.x, rect.corner.x + rect.width));
-		let yN = Math.max(rect.corner.y, Math.min(circle.center.y, rect.corner.y + rect.height));
+		let xN = Math.max(
+			rect.corner.x,
+			Math.min(circle.center.x, rect.corner.x + rect.width),
+		);
+		let yN = Math.max(
+			rect.corner.y,
+			Math.min(circle.center.y, rect.corner.y + rect.height),
+		);
 
 		let dX = xN - circle.center.x;
 		let dY = yN - circle.center.y;
 
-        return (dX * dX + dY * dY) <= circle.radius * circle.radius;
+		return dX * dX + dY * dY <= circle.radius * circle.radius;
 	}
 
 	static circleAndPolygon(circle: Circle, polygon: PolygonI) {
@@ -102,7 +145,7 @@ export class NarrowCollision {
 				return true;
 			}
 		}
-		
+
 		if (this.pointAndPolygon(circle.center, polygon)) {
 			return true;
 		}
@@ -115,10 +158,14 @@ export class NarrowCollision {
 	}
 
 	static rectangleAndRectangle(rectA: RectangleI, rectB: RectangleI) {
-		const leftSideAtTheLeftOfTheRightSide = rectA.corner.x < rectB.corner.x + rectB.width;
-		const rightSideAtTheRightOfTheLeftSide = rectA.corner.x + rectA.width > rectB.corner.x;
-		const topSideOverTheBottomSide = rectA.corner.y < rectB.corner.y + rectB.height;
-		const bottomSideUnderneathTheTopSide = rectA.corner.y + rectA.height > rectB.corner.y;
+		const leftSideAtTheLeftOfTheRightSide =
+			rectA.corner.x < rectB.corner.x + rectB.width;
+		const rightSideAtTheRightOfTheLeftSide =
+			rectA.corner.x + rectA.width > rectB.corner.x;
+		const topSideOverTheBottomSide =
+			rectA.corner.y < rectB.corner.y + rectB.height;
+		const bottomSideUnderneathTheTopSide =
+			rectA.corner.y + rectA.height > rectB.corner.y;
 
 		return (
 			leftSideAtTheLeftOfTheRightSide &&
@@ -128,34 +175,60 @@ export class NarrowCollision {
 		);
 	}
 
-	static lineAndLine(lineA: LineI, lineB: LineI) {		
-		const denominator =  ((lineB.end.y - lineB.start.y) * (lineA.end.x - lineA.start.x) - (lineB.end.x - lineB.start.x) * (lineA.end.y - lineA.start.y));
+	static lineAndLine(lineA: LineI, lineB: LineI) {
+		const denominator =
+			(lineB.end.y - lineB.start.y) * (lineA.end.x - lineA.start.x) -
+			(lineB.end.x - lineB.start.x) * (lineA.end.y - lineA.start.y);
 
 		if (denominator === 0) {
 			return false;
 		}
 
-		const uA = ((lineB.end.x - lineB.start.x) * (lineA.start.y - lineB.start.y) - (lineB.end.y - lineB.start.y) * (lineA.start.x - lineB.start.x)) / denominator;
-		const uB = ((lineA.end.x - lineA.start.x) * (lineA.start.y - lineB.start.y) - (lineA.end.y - lineA.start.y) * (lineA.start.x - lineB.start.x)) / denominator;
+		const uA =
+			((lineB.end.x - lineB.start.x) * (lineA.start.y - lineB.start.y) -
+				(lineB.end.y - lineB.start.y) * (lineA.start.x - lineB.start.x)) /
+			denominator;
+		const uB =
+			((lineA.end.x - lineA.start.x) * (lineA.start.y - lineB.start.y) -
+				(lineA.end.y - lineA.start.y) * (lineA.start.x - lineB.start.x)) /
+			denominator;
 
-		return (uA >= 0 && uA <= 1) && (uB >= 0 && uB <= 1);
+		return uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1;
 	}
 
 	static lineAndRectangle(line: LineI, rect: RectangleI) {
-		if (this.pointAndRectangle(line.start, rect) || this.pointAndRectangle(line.end, rect)) {
+		if (
+			this.pointAndRectangle(line.start, rect) ||
+			this.pointAndRectangle(line.end, rect)
+		) {
 			return true;
 		}
 
-		const leftCollision = this.lineAndLine(line, { start: { x: rect.corner.x, y: rect.corner.y }, end: { x: rect.corner.x, y: rect.corner.y + rect.height }});
-		const rightCollision = this.lineAndLine(line, { start: { x: rect.corner.x + rect.width, y: rect.corner.y }, end: { x: rect.corner.x, y: rect.corner.y }});
-		const topCollision = this.lineAndLine(line, { start: { x: rect.corner.x, y: rect.corner.y }, end: { x: rect.corner.x + rect.width, y: rect.corner.y }});
-		const bottomCollision = this.lineAndLine(line, { start: { x: rect.corner.x, y: rect.corner.y + rect.height }, end: { x: rect.corner.x + rect.width, y: rect.corner.y + rect.height }});
+		const leftCollision = this.lineAndLine(line, {
+			start: { x: rect.corner.x, y: rect.corner.y },
+			end: { x: rect.corner.x, y: rect.corner.y + rect.height },
+		});
+		const rightCollision = this.lineAndLine(line, {
+			start: { x: rect.corner.x + rect.width, y: rect.corner.y },
+			end: { x: rect.corner.x, y: rect.corner.y },
+		});
+		const topCollision = this.lineAndLine(line, {
+			start: { x: rect.corner.x, y: rect.corner.y },
+			end: { x: rect.corner.x + rect.width, y: rect.corner.y },
+		});
+		const bottomCollision = this.lineAndLine(line, {
+			start: { x: rect.corner.x, y: rect.corner.y + rect.height },
+			end: { x: rect.corner.x + rect.width, y: rect.corner.y + rect.height },
+		});
 
-		return (leftCollision || rightCollision || topCollision || bottomCollision)
+		return leftCollision || rightCollision || topCollision || bottomCollision;
 	}
 
 	static lineAndPolygon(line: LineI, polygon: PolygonI) {
-		if (this.pointAndPolygon(line.start, polygon) || this.pointAndPolygon(line.end, polygon)) {
+		if (
+			this.pointAndPolygon(line.start, polygon) ||
+			this.pointAndPolygon(line.end, polygon)
+		) {
 			return true;
 		}
 
@@ -184,13 +257,19 @@ export class NarrowCollision {
 				j = 0;
 			}
 
-			const temporaryLine = new Line(polygonB.vertices[i], polygonB.vertices[j]);
+			const temporaryLine = new Line(
+				polygonB.vertices[i],
+				polygonB.vertices[j],
+			);
 			if (this.lineAndPolygon(temporaryLine, polygonA)) {
 				return true;
 			}
 		}
 
-		if (this.pointAndPolygon(polygonB.vertices[0], polygonA) || this.pointAndPolygon(polygonA.vertices[0], polygonB)) {
+		if (
+			this.pointAndPolygon(polygonB.vertices[0], polygonA) ||
+			this.pointAndPolygon(polygonA.vertices[0], polygonB)
+		) {
 			return true;
 		}
 
