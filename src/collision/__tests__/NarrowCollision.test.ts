@@ -205,7 +205,6 @@ describe("NarrowColission", () => {
 	});
 
 	describe("pointAndPolygon()", () => {
-
 		it("should return true if point collides with polygon", () => {
 			const polygon = createPolygon(
 				createPoint(2, 1),
@@ -229,6 +228,99 @@ describe("NarrowColission", () => {
 			const point = createPoint(1, 1);
 
 			expect(NarrowCollision.pointAndPolygon(point, polygon)).toEqual(false);
+		})
+	})
+
+	describe("circleAndPolygon()", () => {
+		it("should return true if circle collides with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(3, 5),
+				createPoint(5, 5),
+				createPoint(5, 3),
+				createPoint(4, 0)
+			);
+			const circle = createCircle(createPoint(2, 1), 1);
+
+			expect(NarrowCollision.circleAndPolygon(circle, polygon)).toEqual(true);
+		});
+		it("should return false if circle does not collide with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(3, 5),
+				createPoint(5, 5),
+				createPoint(5, 3),
+				createPoint(4, 0)
+			);
+			const circle = createCircle(createPoint(1, 0), 1);
+
+			expect(NarrowCollision.circleAndPolygon(circle, polygon)).toEqual(false);
+		})
+	})
+
+	describe("lineAndPolygon()", () => {
+		it("should return true if line collides with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(3, 5),
+				createPoint(5, 5),
+				createPoint(5, 3),
+				createPoint(4, 0)
+			);
+			const line = createLine(createPoint(2, 2), createPoint(4, 0));
+
+			expect(NarrowCollision.lineAndPolygon(line, polygon)).toEqual(true);
+		});
+		it("should return false if line does not collide with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(3, 5),
+				createPoint(5, 5),
+				createPoint(5, 3),
+				createPoint(4, 0)
+			);
+			const line = createLine(createPoint(2, 5), createPoint(2, 2));
+
+			expect(NarrowCollision.lineAndPolygon(line, polygon)).toEqual(false);
+		})
+	})
+
+	describe("polygonAndPolygon()", () => {
+		it("should return true if polygon collides with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(3, 5),
+				createPoint(5, 5),
+				createPoint(5, 3),
+				createPoint(4, 0)
+			);
+			const polygon2 = createPolygon(
+				createPoint(4, 4),
+				createPoint(4, 6),
+				createPoint(8, 6),
+				createPoint(9, 1),
+				createPoint(5, 0)
+			)
+
+			expect(NarrowCollision.polygonAndPolygon(polygon, polygon2)).toEqual(true);
+		});
+		it("should return false if polygon does not collide with polygon", () => {
+			const polygon = createPolygon(
+				createPoint(2, 1),
+				createPoint(3, 5),
+				createPoint(5, 5),
+				createPoint(5, 3),
+				createPoint(4, 0)
+			);
+			const polygon2 = createPolygon(
+				createPoint(6, 6),
+				createPoint(6, 8),
+				createPoint(8, 6),
+				createPoint(9, 1),
+				createPoint(5, 0)
+			)
+
+			expect(NarrowCollision.polygonAndPolygon(polygon, polygon2)).toEqual(false);
 		})
 	})
 });

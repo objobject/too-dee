@@ -1,3 +1,4 @@
+import { Line } from '../shapes/Line';
 import { Polygon } from '../shapes/Polygon';
 import { PointI, LineI, Circle, RectangleI, PolygonI, TriangleI } from '../types';
 import { Utils } from '../Utils';
@@ -88,7 +89,29 @@ export class NarrowCollision {
 	}
 
 	static circleAndPolygon(circle: Circle, polygon: PolygonI) {
+		for (let i = 0; i < polygon.vertices.length; i++) {
+			let j = i + 1;
 
+			if (j === polygon.vertices.length) {
+				j = 0;
+			}
+
+			const temporaryLine = new Line(polygon.vertices[i], polygon.vertices[j]);
+
+			if (this.circleAndLine(circle, temporaryLine)) {
+				return true;
+			}
+		}
+		
+		if (this.pointAndPolygon(circle.center, polygon)) {
+			return true;
+		}
+
+		if (this.pointAndCircle(polygon.vertices[0], circle)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	static rectangleAndRectangle(rectA: RectangleI, rectB: RectangleI) {
@@ -132,10 +155,45 @@ export class NarrowCollision {
 	}
 
 	static lineAndPolygon(line: LineI, polygon: PolygonI) {
+		if (this.pointAndPolygon(line.start, polygon) || this.pointAndPolygon(line.end, polygon)) {
+			return true;
+		}
 
+		for (let i = 0; i < polygon.vertices.length; i++) {
+			let j = i + 1;
+
+			if (j === polygon.vertices.length) {
+				j = 0;
+			}
+
+			const temporaryLine = new Line(polygon.vertices[i], polygon.vertices[j]);
+
+			if (this.lineAndLine(line, temporaryLine)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	static polygonAndPolygon(polygonA: PolygonI, polygonB: PolygonI) {
+		for (let i = 0; i < polygonB.vertices.length; i++) {
+			let j = i + 1;
 
+			if (j === polygonB.vertices.length) {
+				j = 0;
+			}
+
+			const temporaryLine = new Line(polygonB.vertices[i], polygonB.vertices[j]);
+			if (this.lineAndPolygon(temporaryLine, polygonA)) {
+				return true;
+			}
+		}
+
+		if (this.pointAndPolygon(polygonB.vertices[0], polygonA) || this.pointAndPolygon(polygonA.vertices[0], polygonB)) {
+			return true;
+		}
+
+		return false;
 	}
 }
